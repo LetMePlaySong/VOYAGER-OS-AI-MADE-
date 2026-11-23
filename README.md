@@ -1,5 +1,9 @@
 # Voyager OS
 
+<p align="center">
+<img width="1282" height="802" alt="Voyager OS preview" src="https://github.com/user-attachments/assets/323a9028-15a2-40c9-b699-ebb99d8d32fd" />
+</p>
+
 *Voyager OS is a from-scratch, bootable 64-bit operating system written
 entirely in C and C++ — no host OS at runtime. It boots via Limine on
 BIOS/UEFI and ships a full GUI desktop: file manager, web browser,
@@ -104,7 +108,7 @@ make -j4          # produces build/voyager.iso
 - Draggable, resizable windows with traffic-light controls
 - Zoom button: boing resize to fullscreen and back, live relayout
 - Animated dock with magnification, scroll arrows, window lists,
-  auto-hide in fullscreen
+  auto-hide in fullscreen, drop shadows on all chrome
 - Desktop icons with drag-and-drop, marquee selection, context menus
 - Menu bar: Voyager menu, network popup, volume slider, calendar,
   live clock
@@ -120,12 +124,12 @@ make -j4          # produces build/voyager.iso
 |-----|-------------|
 | **Files** | Finder-style file manager — System HD, user files, detected disks, drag & drop, thumbnails, rename/delete, disk eject/refresh/properties, unified animated sidebar |
 | **Voyage Web** | Web browser — dynamic tabs, back/forward/reload, URL bar with Frogfind search (`frogfind.com/?q=...`), HTML/CSS/JS rendering engine, images, animated GIFs, downloads |
-| **Voyage Player** | Music player — MP3/WAV/OGG, playlist, scrolling song title, keeps playing while minimized or in background |
+| **Voyage Player** | Music player — MP3/WAV/OGG, playlist, scrolling song title, elapsed/remaining LCD, keeps playing while minimized or in background |
 | **Quill** | Plain-text editor with Save As picker |
 | **Memo** | Sticky notes |
 | **Photos** | Image viewer for PNG/JPEG/GIF |
 | **Calc** | Calculator |
-| **Console** | Command-line shell |
+| **Console** | Command-line shell (disabled — "doesn't work yet") |
 | **Settings** | Wallpaper picker, Date & Time (timezone, auto-DST, SNTP sync, manual set), Task Manager with End Task |
 
 ### System
