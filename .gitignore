@@ -1,5 +1,0 @@
-# Generated at runtime - each user gets their own
-voyager-hd.vdi
-voyager-hd.*.vdi
-qemu-serial.log
-*.log
