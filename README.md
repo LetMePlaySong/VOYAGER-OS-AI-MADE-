@@ -8,95 +8,75 @@
 entirely in C and C++ — no host OS at runtime. It boots via Limine on
 BIOS/UEFI and ships a full GUI desktop: file manager, web browser,
 media player, editors, networking, and sound. Built completely by AI.
-QEMU recommended; VirtualBox is unstable. Experimental — it has bugs.*
+Experimental — it has bugs. Not a daily driver.*
 
 **Voyager OS** is a from-scratch, bootable 64-bit operating system with a
 full graphical desktop — built entirely in C and C++ as a freestanding
 kernel with no host OS dependencies at runtime.
 
-It boots on both BIOS and UEFI through the Limine bootloader, runs on
-real hardware (USB) or QEMU, and ships with a complete desktop
+It boots on both BIOS and UEFI through the Limine bootloader, runs in
+QEMU or on real hardware (USB), and ships with a complete desktop
 environment: file manager, web browser, media player, editors, games,
 persistent settings, networking, and sound.
 
-> **VM note:** Voyager OS is developed and tested on **QEMU** — that's
-> the best and most stable option (`RUN VOYAGER.bat` uses it
-> automatically). **VirtualBox is unstable** with this OS: expect
-> display glitches, input problems, and audio issues. Real hardware via
-> the USB ISO works well.
+> **Not a daily driver.** Voyager OS is a hobby/experimental project.
+> Do **not** use it as your main operating system — expect crashes,
+> data loss, and rough edges. It's for trying out, learning, and fun.
 
-> **Made entirely by AI.** Every line of code in this repository —
-> kernel, drivers, GUI, apps, web engine — was written by an AI coding
-> agent (Devin, by Cognition) working interactively with a human who
-> supplied the idea and feedback. No human wrote the source.
->
-> **This is a hobby/experimental project and it has bugs.** Expect
-> crashes, rough edges, and incomplete features. Known issues include:
-> occasional audio crackle on some hardware, web pages rendering
-> approximately rather than pixel-perfectly, and edge-case crashes
-> under heavy memory pressure. Issue reports and pull requests are
-> welcome but please be patient — fixes depend on available compute
-> time.
+> **VM note:** Use **QEMU** — it's the best and most stable option, and
+> every run script uses it automatically. **VirtualBox is unstable**
+> with this OS: expect display glitches, input problems, and audio
+> issues. Booting the ISO on real hardware via USB works too.
+
+> **Made entirely by AI.** Every line of code in Voyager OS —
+kernel, drivers, GUI, apps, web engine — was written by an AI coding
+agent (Devin, by Cognition) working interactively with a human who
+supplied the idea and feedback. No human wrote the source.
 
 ---
 
-## Quick start
+## Quick start — no building required
 
-### Try it instantly — pick your OS
+This repository ships a ready-to-boot ISO. Just pick your OS and
+double-click (or run) the matching launcher — it boots Voyager OS in
+QEMU with **networking + sound enabled** automatically. No compilers,
+no dependencies to install beyond QEMU itself.
 
-**Windows** — double-click **`RUN VOYAGER.bat`**
+### Windows
 
-The script does everything:
+Double-click **`RUN VOYAGER.bat`**
 
-1. Checks for WSL — installs it if missing
-2. Checks for QEMU — installs it if missing
-3. Checks the compiler toolchain inside WSL — installs it if missing
-4. Builds the ISO (`build/voyager.iso`)
-5. Boots Voyager OS in QEMU with **networking + sound enabled**
+The script finds QEMU (or tells you how to install it), creates the
+persistent settings disk (`voyager-hd.vdi`) on first run, and boots
+the ISO. Close the QEMU window to exit.
 
-Already installed? It skips straight to building and booting.
-Close the QEMU window to exit.
+### macOS
 
-**macOS** — double-click **`RUN VOYAGER.command`**
+Double-click **`RUN VOYAGER.command`**
 
-> If double-clicking does nothing (macOS Gatekeeper may block it),
-> open **Terminal**, `cd` into this folder, and run:
-> `bash run-voyager.sh` — the `.sh` scripts are the fallback for
-> every platform and do exactly the same thing.
+> If macOS Gatekeeper blocks the double-click, open **Terminal**,
+> `cd` into this folder, and run `bash run-voyager.sh` — the `.sh`
+> script is the universal fallback on every platform.
 
-The script auto-installs QEMU, nasm, xorriso, and llvm via Homebrew,
-detects an ELF-capable toolchain (osxcross, or clang+ld.lld), builds
-the ISO, creates the settings disk, and boots QEMU.
+The script auto-installs QEMU via Homebrew if needed, creates the
+settings disk, and boots the ISO.
 
-**Linux** — open a terminal in this folder and run:
+### Linux
+
+Open a terminal in this folder and run:
 
 ```bash
 ./run-voyager.sh        # or: bash run-voyager.sh
 ```
 
-It auto-installs missing packages via apt, builds, and boots QEMU.
+It auto-installs QEMU via apt/dnf/pacman if needed, creates the
+settings disk, and boots the ISO.
 
-### Make a bootable USB (real computer)
+### Boot on a real computer (USB)
 
-Same idea, build-only version:
-
-- **Windows** — double-click **`MAKE ISO.bat`**
-- **macOS** — double-click **`MAKE ISO.command`** (fallback:
-  `bash make-iso.sh` in Terminal)
-- **Linux** — `./make-iso.sh` (or `bash make-iso.sh`)
-
-All three produce **`Your ISO is here/voyager.iso`** and print the
-next steps.
-
-Then flash the ISO to a USB stick (4 GB+) with **balenaEtcher**
-(etcher.balena.io) or **Rufus** (rufus.ie, Windows): select the ISO,
-select the drive, flash. Boot the PC from the USB.
-
-### Manual build
-
-```bash
-make -j4          # produces build/voyager.iso
-```
+Flash **`Your ISO is here/voyager.iso`** to a USB stick (4 GB+) with
+**balenaEtcher** (etcher.balena.io) or **Rufus** (rufus.ie, Windows):
+select the ISO, select the drive, flash. Boot the PC from the USB.
 
 ---
 
@@ -112,60 +92,56 @@ make -j4          # produces build/voyager.iso
 - Desktop icons with drag-and-drop, marquee selection, context menus
 - Menu bar: Voyager menu, network popup, volume slider, calendar,
   live clock
-- Full cursor system: arrow, hand, I-beam, busy, resize grips —
-  leases release instantly when leaving their owner
-- Custom 8x8 bitmap font, 9 free-licensed photographic wallpapers
-  (CC0 / public domain — see `assets/WALLPAPER-CREDITS.txt`)
-- Persistent settings across reboots (wallpaper, username, icons)
+- Full cursor system: arrow, hand, I-beam, busy, resize grips
+- 9 free-licensed photographic wallpapers (CC0 / public domain)
+- Persistent settings across reboots (wallpaper, username, files)
 
 ### Applications
 
 | App | Description |
 |-----|-------------|
-| **Files** | Finder-style file manager — System HD, user files, detected disks, drag & drop, thumbnails, rename/delete, disk eject/refresh/properties, unified animated sidebar |
-| **Voyage Web** | Web browser — dynamic tabs, back/forward/reload, URL bar with Frogfind search (`frogfind.com/?q=...`), HTML/CSS/JS rendering engine, images, animated GIFs, downloads |
-| **Voyage Player** | Music player — MP3/WAV/OGG, playlist, scrolling song title, elapsed/remaining LCD, keeps playing while minimized or in background |
+| **Files** | Finder-style file manager — System HD, user files, detected disks, drag & drop, thumbnails, rename/delete, disk eject/refresh/properties |
+| **Voyage Web** | Web browser — dynamic tabs, back/forward/reload, URL bar with Frogfind search, HTML/CSS/JS rendering engine, images, animated GIFs, downloads |
+| **Voyage Player** | Music player — MP3/WAV/OGG, playlist, scrolling song title, elapsed/remaining LCD, keeps playing while minimized |
 | **Quill** | Plain-text editor with Save As picker |
 | **Memo** | Sticky notes |
 | **Photos** | Image viewer for PNG/JPEG/GIF |
 | **Calc** | Calculator |
-| **Console** | Command-line shell (disabled — "doesn't work yet") |
-| **Settings** | Wallpaper picker, Date & Time (timezone, auto-DST, SNTP sync, manual set), Task Manager with End Task |
+| **Console** | Command-line shell (disabled — doesn't work yet) |
+| **Settings** | Wallpaper picker, Date & Time (timezone, auto-DST, SNTP sync), Task Manager with End Task |
 
 ### System
 
-- **Kernel**: freestanding x86-64, Limine protocol, GDT/IDT, heap,
+- **Kernel**: freestanding x86-64, Limine boot protocol, GDT/IDT, heap,
   framebuffer abstraction, PS/2 keyboard + mouse
 - **Storage**: custom Voyager volume format (VFS) user disk, System HD
   catalog from ISO modules, ATA driver with hot-plug media polling
-  (USB, optical, VM drives)
 - **Networking**: e1000 driver, ARP, ICMP, UDP, DNS, TCP, HTTP client,
-  SNTP time sync (like Windows, retries on failure)
+  SNTP time sync
 - **Audio**: AC97 driver with PCM ring buffer, MP3 via minimp3,
   WAV/OGG support, software volume
 - **Web engine**: custom HTML parser + layout + JS interpreter subset,
   CSS-ish styling, forms, links, images, scrolling
-- **Reliability**: OOM watchdog (warns then auto-closes apps),
-  disk-space guard on saves/downloads, styled modal dialogs
+- **Reliability**: OOM watchdog, disk-space guard on saves/downloads,
+  styled modal dialogs
 
 ---
 
 ## Repository layout
 
 ```
-Application/   Voyager apps (VoyageWeb, VoyagePlayer, Quill, ...)
-assets/        Icons, cursors, wallpapers (+ WALLPAPER-CREDITS.txt)
-boot/          Limine config
-drivers/       AC97, ATA, e1000, PS/2
-kernel/        Core kernel, framebuffer, VFS, sysvol, PNG/JPEG/GIF
-gui/           Window manager, widgets, app registration
-lib/           libc subset, font, embedded assets, minimp3
-net/           TCP/IP stack, HTTP, HTML engine, JS engine
-tools/         sysvol.sh, png2h, limine binaries
-RUN VOYAGER.bat One-click build + QEMU boot (try it out)
-MAKE ISO.bat   Build voyager.iso for USB/real hardware
-Makefile       Build system (WSL/Linux)
+Your ISO is here/
+    voyager.iso         Ready-to-boot Voyager OS image (54 MB)
+RUN VOYAGER.bat        Windows launcher — boots the ISO in QEMU
+RUN VOYAGER.command    macOS launcher (double-click)
+run-voyager.sh         Linux/macOS launcher — boots the ISO in QEMU
+LICENSE                Project license
 ```
+
+All three launchers do the same thing: locate/install QEMU, create the
+16 MB `voyager-hd.vdi` settings disk on first run, then boot
+`voyager.iso` with e1000 networking, AC97 sound, and a serial log
+(`qemu-serial.log`).
 
 ---
 
@@ -174,8 +150,7 @@ Makefile       Build system (WSL/Linux)
 - **Bootloader**: Limine (BSD-2-Clause)
 - **MP3 decoding**: minimp3 (CC0 / public domain)
 - **JPEG decoding**: picojpeg (public domain)
-- **Wallpapers**: free-licensed photography via Openverse — see
-  `assets/WALLPAPER-CREDITS.txt`
+- **Wallpapers**: free-licensed photography via Openverse
 - **Test music**: "Straight Fuse" by French Fuse
 
 Voyager OS is an independent project — not affiliated with any
