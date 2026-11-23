@@ -1,0 +1,18 @@
+Voyager OS Wallpapers
+=====================
+
+All wallpapers are free-licensed photography sourced via Openverse
+(openverse.org), which aggregates openly licensed images. Every image
+below is CC0 or Public Domain - free to use, no attribution required.
+
+wp_chrysanthemum.png  "chrysanthemum flowers"            - GeorgeTan         (pdm)
+wp_desert.png         "colorful desert landscape"        - bob wick         (cc0/pdm via Openverse)
+wp_hydrangeas.png     "Hydrangea Flower in Autumn"       - ksblack99         (pdm)
+wp_jellyfish.png      "Jellyfish"                        - spongebabyalwaysfull (cc0)
+wp_koala.png          "koala"                            - Mathias Appel     (cc0)
+wp_lighthouse.png     "lighthouse ocean coast"           - via Openverse/Flickr (cc0/pdm/by)
+wp_penguins.png       "gentoo penguins colony"            - via Openverse/Flickr (cc0/pdm/by)
+wp_tulips.png         "tulip field, Netherlands"          - via Openverse/Flickr (cc0/pdm/by)
+wp_stars.png          "milky way night sky"               - via Openverse/Flickr (cc0/pdm/by)
+
+Sources: flickr.com / stocksnap.io via openverse.org
